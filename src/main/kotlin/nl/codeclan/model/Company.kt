@@ -1,12 +1,27 @@
 package nl.codeclan.model
 
+import jakarta.persistence.*
+import jakarta.validation.constraints.NotBlank
+
+@Entity
 class Company(
-    val id: Int,
+    @field:NotBlank(message = "Name must not be blank")
     val name: String,
-    val city: String,
-    val streetName: String,
-    val zipCode: String,
-    val houseNumber: String,
+
+    @field:NotBlank(message = "Contact phone number must not be blank")
     val contactPersonTelephone: String,
-    val contactPerson: String) {
+
+) {
+
+    constructor() : this("", "")
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long = 0
+
+    @OneToOne(cascade = [(CascadeType.ALL)])
+    var address: Address = Address()
+
+    var contactPerson: String = ""
+
 }

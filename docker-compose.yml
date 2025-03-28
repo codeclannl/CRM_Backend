@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  db:
+#    image: postgres:16.8-bullseye
+    image: postgres:17.4-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: qPC765buuL3qjnHxmSn8
+      POSTGRES_USER: crm_user
+      POSTGRES_DB: crm
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+
+volumes:
+  postgres_data:
