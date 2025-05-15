@@ -26,7 +26,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql:42.7.5")
-
+    implementation("org.hibernate.common:hibernate-commons-annotations:6.0.6.Final")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("io.swagger.core.v3:swagger-core:2.2.28")

@@ -30,11 +30,11 @@ class CompanyRestController {
     }
 
     @DeleteMapping("/delete")
-    fun deleteCompany(@Valid @RequestBody company: Company): Boolean {
-        logger.info("Deleting Company ${company.id}")
+    fun deleteCompany(@Valid @RequestParam id: Long): Boolean {
+        logger.info("Deleting Company ${id}")
 
-        if (companyRepository.findById(company.id).isPresent) {
-            companyRepository.deleteById(company.id)
+        if (companyRepository.findById(id).isPresent) {
+            companyRepository.deleteById(id)
 
             return true
         }
@@ -58,13 +58,17 @@ class CompanyRestController {
         return all.toList()
     }
 
-    @PatchMapping("/updateCompany")
-    fun updateCompany(@Valid @RequestBody company: Company): Boolean {
-        logger.info("Updating Company ${company.name}")
+    @PatchMapping("/update")
+    fun updateCompany(@Valid @RequestBody updatedCompany: Company): Boolean {
+        logger.info("Updating Company ${updatedCompany.name}")
 
-        val update = companyRepository.updateCompany(company.name, company.contactPersonTelephone, company.address, company.contactPersonTelephone, company.id)
+        if (companyRepository.findById(updatedCompany.id).isPresent) {
+            companyRepository.save(updatedCompany)
 
-        return update > 0
+            return true
+        }
+
+        return false
     }
 
 

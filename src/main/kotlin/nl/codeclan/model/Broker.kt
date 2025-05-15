@@ -1,14 +1,14 @@
 package nl.codeclan.model
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 
 @Entity
 class Broker(
-    val name: String,
-    val contactNumber: String,
-    val contactName: String) {
+    val name: String
+) {
 
-    constructor() : this("", "", "")
+    constructor() : this("")
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,4 +16,9 @@ class Broker(
 
     @OneToOne(cascade = [(CascadeType.ALL)])
     var address: Address = Address()
+
+    @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.LAZY, mappedBy = "broker")
+    @JsonManagedReference
+    val contactPersons: MutableList<BrokerContactPerson> = ArrayList()
+
 }

@@ -1,8 +1,8 @@
 package nl.codeclan.repository
 
-import nl.codeclan.model.Address
+import nl.codeclan.model.Employee
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AddressRepository : CrudRepository<Address, Long>
+interface EmployeeRepository : CrudRepository<Employee, Long>

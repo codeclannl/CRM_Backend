@@ -29,11 +29,11 @@ class BrokerRestController {
     }
 
     @DeleteMapping("/delete")
-    fun deleteBroker(@Valid @RequestBody broker: Broker): Boolean {
-        logger.info("Deleting Broker with id ${broker.id}")
+    fun deleteBroker(@Valid @RequestParam id: Long): Boolean {
+        logger.info("Deleting Broker with id ${id}")
 
-        if (brokerRepository.findById(broker.id).isPresent) {
-            brokerRepository.deleteById(broker.id)
+        if (brokerRepository.findById(id).isPresent) {
+            brokerRepository.deleteById(id)
 
             return true
         }
@@ -57,13 +57,13 @@ class BrokerRestController {
         return all.toList()
     }
 
-    @PatchMapping("/updateBroker")
+    @PatchMapping("/update")
     fun updateBroker(@Valid @RequestBody broker: Broker): Boolean {
         logger.info("Updating Broker ${broker.name}")
 
-        val update = brokerRepository.updateBroker(broker.name, broker.contactName, broker.contactNumber, broker.id)
+        brokerRepository.save(broker)
 
-        return update > 0
+        return true
     }
 
 
