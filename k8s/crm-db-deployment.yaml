@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    name: crm-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-pod
+  template:
+    metadata:
+      name: crm-database
+      labels:
+        name: postgresql-pod
+    spec:
+      containers:
+        - name: postgresql-database
+          image: postgres:17.5-alpine3.21
+

@@ -1,6 +1,17 @@
 version: '3.9'
 
 services:
+  server:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - POSTGRES_URL=jdbc:postgresql://localhost:5432/crm
+
   db:
 #    image: postgres:16.8-bullseye
     image: postgres:17.4-alpine3.21
@@ -11,6 +22,11 @@ services:
       POSTGRES_DB: crm
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "crm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

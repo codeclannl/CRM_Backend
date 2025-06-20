@@ -71,5 +71,4 @@ class CompanyRestController {
         return false
     }
 
-
 }
