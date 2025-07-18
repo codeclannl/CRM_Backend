@@ -1,5 +1,5 @@
 To start a postgres database with the credentials used in the application
-docker run --name crm-postgres -e POSTGRES_PASSWORD=qPC765buuL3qjnHxmSn8 -e POSTGRES_USER=crm_user -e POSTGRES_DB=crm -d postgres:17.4-alpine3.21
+docker run --name crm-postgres -e POSTGRES_PASSWORD=qPC765buuL3qjnHxmSn8 -e POSTGRES_USER=crm_user -e POSTGRES_DB=crm -p 5432:5432 -d postgres:17.4-alpine3.21
 
 To create an image for the back-end
 gradle bootBuildImage --imageName=gorgyra/crm-backend

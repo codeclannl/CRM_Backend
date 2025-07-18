@@ -23,10 +23,10 @@ class AssignmentController {
     }
 
     @DeleteMapping("/delete")
-    fun deleteAssignmenty(@Valid @RequestParam id: Long): Boolean {
+    fun deleteAssignment(@Valid @RequestParam id: Long): Boolean {
         logger.info("Deleting assignment ${id}")
 
-        return assignmentService.deleteAssignment(id);
+        return assignmentService.deleteAssignment(id)
     }
 
     @GetMapping("/listAll")

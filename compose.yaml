@@ -1,0 +1,46 @@
+
+services:
+  postgres-db:
+    image: postgres:17.4-alpine3.21
+    restart: always
+    build:
+      context: .
+    container_name: postgres-db
+    environment:
+      POSTGRES_PASSWORD: qPC765buuL3qjnHxmSn8
+      POSTGRES_USER: crm
+      POSTGRES_DB: crm
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "crm"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data_crm:/var/lib/postgresql/data2
+
+  server:
+    build:
+      context: .
+    container_name: crm-backend-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    links:
+      - postgres-db
+    environment:
+      - POSTGRES_URL=jdbc:postgresql://localhost:5432/crm
+
+
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+
+
+volumes:
+  postgres_data_crm:
