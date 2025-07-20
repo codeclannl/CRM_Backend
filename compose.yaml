@@ -3,8 +3,6 @@ services:
   postgres-db:
     image: postgres:17.4-alpine3.21
     restart: always
-    build:
-      context: .
     container_name: postgres-db
     environment:
       POSTGRES_PASSWORD: qPC765buuL3qjnHxmSn8

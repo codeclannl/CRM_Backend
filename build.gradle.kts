@@ -4,13 +4,13 @@ plugins {
 
     id("org.springframework.boot") version "3.5.3"
     id("io.spring.dependency-management") version "1.1.7"
-    id("com.google.cloud.tools.jib") version "3.4.5"
+//    id("com.google.cloud.tools.jib") version "3.4.5"
 }
 
 group = "nl.codeclan"
 version = "0.0.4-SNAPSHOT"
 
-var jibImageUrl = "registry.hub.docker.com/gorgyra/crm-backend:1.0.3"
+//var jibImageUrl = "registry.hub.docker.com/gorgyra/crm-backend:1.0.3"
 
 java {
     toolchain {
@@ -61,21 +61,21 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-jib {
-    extraDirectories {}
-
-    from {
-        image = "amazoncorretto:21-alpine-jdk"
-    }
-    to {
-        image = jibImageUrl
-        auth {
-            username = "docker@gorgyra.com" // Defined in 'gradle.properties'.
-            password = "WheM1cVPwtAH4Dx7kjLu"
-        }
-    }
-    container {
-        user = "crm"
-        mainClass = "nl.codeclan.CrmBackendApplicationKt"
-    }
-}
+//jib {
+//    extraDirectories {}
+//
+//    from {
+//        image = "amazoncorretto:21-alpine-jdk"
+//    }
+//    to {
+//        image = jibImageUrl
+//        auth {
+//            username = "docker@gorgyra.com" // Defined in 'gradle.properties'.
+//            password = "pass"
+//        }
+//    }
+//    container {
+//        user = "crm"
+//        mainClass = "nl.codeclan.CrmBackendApplicationKt"
+//    }
+//}
